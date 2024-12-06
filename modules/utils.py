@@ -25,3 +25,14 @@ def cargar_datos(path):
             return json.load(f)
     except FileNotFoundError:
         return {}
+
+
+# Función para guardar datos en un archivo JSON
+def guardar_datos(path, data):
+    with open(path, 'w') as f:
+        json.dump(data, f, indent=4)
+
+# Función para obtener materias de un usuario
+def obtener_materias(usuario):
+    materias = cargar_datos(MATERIAS_PATH)
+    return materias.get(usuario, [])
