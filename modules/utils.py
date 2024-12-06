@@ -50,3 +50,4 @@ def eliminar_materia(usuario, materia):
     if usuario in materias:
         materias[usuario] = [m for m in materias[usuario] if m['nombre'] != materia]
         guardar_datos(MATERIAS_PATH, materias)
+
