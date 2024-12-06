@@ -26,7 +26,6 @@ def cargar_datos(path):
     except FileNotFoundError:
         return {}
 
-
 # Función para guardar datos en un archivo JSON
 def guardar_datos(path, data):
     with open(path, 'w') as f:
@@ -36,3 +35,18 @@ def guardar_datos(path, data):
 def obtener_materias(usuario):
     materias = cargar_datos(MATERIAS_PATH)
     return materias.get(usuario, [])
+
+# Función para agregar una materia a un usuario
+def agregar_materia(usuario, datos_materia):
+    materias = cargar_datos(MATERIAS_PATH)
+    if usuario not in materias:
+        materias[usuario] = []
+    materias[usuario].append(datos_materia)
+    guardar_datos(MATERIAS_PATH, materias)
+
+# Función para eliminar una materia de un usuario
+def eliminar_materia(usuario, materia):
+    materias = cargar_datos(MATERIAS_PATH)
+    if usuario in materias:
+        materias[usuario] = [m for m in materias[usuario] if m['nombre'] != materia]
+        guardar_datos(MATERIAS_PATH, materias)
